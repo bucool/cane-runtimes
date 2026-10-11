@@ -1,0 +1,93 @@
+#if !CANE_STANDALONE_SHADER
+#include "/Engine/Public/Platform.ush"
+#endif
+#pragma pack_matrix(row_major)
+
+StructuredBuffer<float4> Vertices;
+float4 Bounds;
+float4x4 LocalToClip;
+uint SceneSpace;
+Texture2D SourceTexture;
+float4 Light;
+float4 Dark;
+int4 Modes; // source sRGB, source PMA, final two-color, Gamma blending
+int4 Filtering; // min, mag, wrap U, wrap V
+Texture2D SceneDepth;
+uint ReadSceneDepth;
+#if CANE_SLATE_PRESENTATION
+float4 PresentationTint;
+StructuredBuffer<float4> ClipPlanes;
+uint ClipPlaneCount;
+#endif
+
+void VertexMain(uint Id : SV_VertexID, out float4 Position : SV_Position, out float2 UV : TEXCOORD0)
+{
+    float4 V = Vertices[Id];
+#if CANE_SLATE_PRESENTATION
+    Position = mul(float4(V.xy, 0.0, 1.0), LocalToClip);
+#else
+    Position = SceneSpace != 0 ? mul(float4(V.x, 0.0, V.y, 1.0), LocalToClip) :
+        float4((V.xy - Bounds.xy) / Bounds.zw * 2.0 - 1.0, 0.0, 1.0);
+#endif
+    UV = V.zw;
+}
+float Decode(float V) { return V <= 0.04045 ? V / 12.92 : pow(max(0.0, (V + 0.055) / 1.055), 2.4); }
+float Encode(float V) { return V <= 0.0031308 ? V * 12.92 : 1.055 * pow(max(V, 0.0), 1.0 / 2.4) - 0.055; }
+int Wrap(int I, int N, int Mode)
+{
+    if (Mode == 0) return clamp(I, 0, N - 1);
+    uint Period = uint(Mode == 2 ? N * 2 : N);
+    uint Magnitude = I < 0 ? uint(-(I + 1)) + 1u : uint(I);
+    uint Remainder = Magnitude % Period;
+    uint W = I < 0 && Remainder != 0 ? Period - Remainder : Remainder;
+    return int(Mode == 2 && W >= uint(N) ? Period - W - 1u : W);
+}
+float4 Fetch(int2 Pixel, int2 Size)
+{
+    float4 V = SourceTexture.Load(int3(Wrap(Pixel.x, Size.x, Filtering.z), Wrap(Pixel.y, Size.y, Filtering.w), 0));
+    if (Modes.x != 0) V.rgb = float3(Decode(V.r), Decode(V.g), Decode(V.b));
+    if (Modes.w != 0)
+    {
+        // Stored PMA is canonical linear RGB premultiplied before encoding.
+        // Recover straight linear color, then form Gamma PMA BEFORE filtering.
+        float3 Straight = Modes.y != 0 ? (V.a > 0.000001 ? V.rgb / V.a : 0) : V.rgb;
+        Straight = float3(Encode(Straight.r), Encode(Straight.g), Encode(Straight.b));
+        V.rgb = Modes.y != 0 ? Straight * V.a : Straight;
+    }
+    return V;
+}
+float4 SampleRaw(float2 UV)
+{
+    uint W = 0, H = 0; SourceTexture.GetDimensions(W, H);
+    int2 Size = int2(W, H);
+    float Footprint = max(length(ddx(UV) * Size), length(ddy(UV) * Size));
+    float4 Sample = 0;
+    if ((Footprint > 1.0 ? Filtering.x : Filtering.y) == 0)
+        Sample = Fetch(int2(floor(UV * Size)), Size);
+    else
+    {
+        float2 P = UV * Size - 0.5; int2 B = int2(floor(P)); float2 T = frac(P);
+        Sample = lerp(lerp(Fetch(B, Size), Fetch(B + int2(1, 0), Size), T.x),
+            lerp(Fetch(B + int2(0, 1), Size), Fetch(B + int2(1, 1), Size), T.x), T.y);
+    }
+    return Sample;
+}
+float4 PixelMain(float4 Position : SV_Position, float2 UV : TEXCOORD0) : SV_Target0
+{
+    float4 T = SampleRaw(UV);
+    // BeforeDOF has the same raster viewport as the resolved scene depth. UE uses
+    // reversed Z; sample after derivatives so depth discontinuities do not alter filtering.
+    if (ReadSceneDepth != 0 && SceneDepth.Load(int3(int2(Position.xy), 0)).r > Position.z + 0.000001) discard;
+    if (Modes.y != 0) T.rgb = T.a > 0.000001 ? T.rgb / T.a : 0;
+    float3 RGB = Modes.z != 0 ? Dark.rgb + (Light.rgb - Dark.rgb) * T.rgb : Light.rgb * T.rgb;
+    float Alpha = T.a * Light.a;
+#if CANE_SLATE_PRESENTATION
+    for (uint Plane = 0; Plane < ClipPlaneCount; ++Plane)
+        if (dot(float3(Position.xy, 1.0), ClipPlanes[Plane].xyz) < 0.0) discard;
+    float3 HostTint = PresentationTint.rgb;
+    if (Modes.w != 0) HostTint = float3(Encode(HostTint.r), Encode(HostTint.g), Encode(HostTint.b));
+    RGB *= HostTint;
+    Alpha *= PresentationTint.a;
+#endif
+    return float4(RGB * Alpha, Alpha);
+}

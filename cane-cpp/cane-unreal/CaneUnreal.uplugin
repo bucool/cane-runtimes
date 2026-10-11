@@ -1,0 +1,20 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "0.1.0",
+  "FriendlyName": "Cane Runtime",
+  "Description": "Cane 2D skeletal animation for Unreal Engine 5.8.",
+  "Category": "Animation",
+  "CreatedBy": "Cane",
+  "EngineVersion": "5.8.0",
+  "CanContainContent": true,
+  "IsBetaVersion": true,
+  "SupportedTargetPlatforms": ["Win64"],
+  "Modules": [
+    {"Name": "CaneRuntime", "Type": "Runtime", "LoadingPhase": "PostConfigInit"},
+    {"Name": "CaneEditor", "Type": "Editor", "LoadingPhase": "Default"}
+  ],
+  "Plugins": [
+    {"Name": "ProceduralMeshComponent", "Enabled": true}
+  ]
+}

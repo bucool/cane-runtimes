@@ -1,0 +1,17 @@
+{
+  "schema": "cane.runtimes/spec-lock/v1",
+  "runtimeFormat": {
+    "major": 1,
+    "minor": 1
+  },
+  "runtimeApi": {
+    "major": 1,
+    "minor": 13
+  },
+  "conformance": {
+    "suiteVersion": "1.17.0",
+    "manifestSha256": "f462e113115ecd60322f6f5d9df451e05d82649d0ded3278137f4b873e3ce0f9",
+    "requiredCaseCount": 391,
+    "status": "passed"
+  }
+}

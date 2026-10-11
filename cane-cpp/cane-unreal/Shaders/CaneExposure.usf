@@ -1,0 +1,22 @@
+#if !CANE_STANDALONE_SHADER
+#include "/Engine/Public/Platform.ush"
+#endif
+
+Texture2D InputColor;
+float4 InputRect;
+float4 OutputRect;
+float ExposureScale;
+
+void VertexMain(uint Id : SV_VertexID, out float4 Position : SV_Position)
+{
+    float2 UV = float2((Id << 1) & 2, Id & 2);
+    Position = float4(UV * float2(2, -2) + float2(-1, 1), 0, 1);
+}
+float4 PixelMain(float4 Position : SV_Position) : SV_Target0
+{
+    int2 Pixel = int2(InputRect.xy + floor((Position.xy - OutputRect.xy) / OutputRect.zw * InputRect.zw));
+    Pixel = clamp(Pixel, int2(InputRect.xy), int2(InputRect.xy + InputRect.zw) - 1);
+    float4 Color = InputColor.Load(int3(Pixel, 0));
+    // Alpha is never pre-exposed. In particular, preserve additive alpha above one.
+    return float4(Color.rgb * ExposureScale, Color.a);
+}
