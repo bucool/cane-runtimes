@@ -2,25 +2,20 @@
 
 [English](EDITOR_WORKFLOW.md) | **简体中文**
 
-使用 **LayaAir IDE 3.4.1**。本指南介绍编辑器资源包的使用流程。
-首版公开仓库只提供源码，不包含 `.layapkg` 安装包和示例 ZIP。
-源码集成请先阅读[构建说明](../../../docs/BUILDING.md)和 [Runtime API](API.md)。
+使用 **LayaAir IDE 3.4.1**。从 [GitHub Release](https://github.com/bucool/cane-runtimes/releases/tag/v0.1.0-preview.1)
+下载 IDE 资源 ZIP。Core 和渲染 Runtime 已编译为 JavaScript，附带配套类型声明。
+组件及 IDE 集成脚本由 IDE 自动编译。
 
-在编辑器资源包中，Core、渲染 Runtime 已编译为 JavaScript，并附带 TypeScript 类型声明。
-组件和编辑器扩展由 IDE 自动编译，无需安装 npm 依赖、手动编译 Runtime、连接 MCP 或注册 Cane 帐号。
+## 安装
 
-## 安装并打开示例
+1. 关闭目标工程，把 ZIP 中的 `assets/Cane` 目录解压到工程中，保留此路径和全部 `.meta` 文件。
+2. 使用 LayaAir IDE 3.4.1 重新打开工程，等待脚本编译完成。
+3. 按下方步骤导入自己的 Runtime 导出文件，选中生成的节点，设置动画、皮肤、循环、速度和自动播放。
+4. 勾选 **编辑器预览 / Preview** 在场景视图中播放，或点击 **预览运行** 运行游戏。
 
-1. 在 IDE 中打开一个 2D 工程，通过 **工具 → 导入资源包** 选择 Cane `.layapkg`，
-   将所有条目导入 `assets/Cane`。等待 IDE 自动编译脚本完成，必要时重新打开场景。
-2. 也可以直接解压完整 Cane Bot 示例 ZIP，打开其中的 `.laya` 工程；示例已包含安装包和原创素材。
-3. 打开 `Scene.ls`，选中任一 Cane Bot 节点。**Cane Skeleton** 组件中可以设置数据、动画、
-   皮肤、循环、速度、自动播放和编辑器预览。
-4. 勾选 **编辑器预览 / Preview** 在场景视图播放，或点击 IDE 的 **预览运行** 运行游戏。
-   取消勾选即可停止编辑器播放。
-
-每个工程只安装一份，保留在 `assets/Cane`。本包通过资源包导入，不使用包管理器安装。
-不要同时加载另一份浏览器 Runtime。更新覆盖该目录之前，请先备份工程。
+每个工程只安装一份。此 ZIP 通过复制文件安装，不使用 `.layapkg` 导入或包管理器。
+不要同时加载第二份浏览器 Runtime。发行包不包含示例场景或素材。
+源码集成请见[构建说明](../../../docs/BUILDING.md)。
 
 ## 导入自己的动画
 

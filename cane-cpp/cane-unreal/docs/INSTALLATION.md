@@ -10,6 +10,15 @@ The Windows Editor target also requires the **.NET Framework 4.8 SDK** component
 from Visual Studio Installer (the modern bundled .NET SDK is a separate product).
 Unreal's SwarmInterface checks for this SDK before compiling any plugin code.
 
+## Install the release plugin
+
+The [Release](https://github.com/bucool/cane-runtimes/releases/tag/v0.1.0-preview.1) includes `cane-unreal-5.8-win64-plugin-0.1.0-preview.1.zip`.
+Extract its `CaneUnreal` folder into `YourProject/Plugins`. The package includes
+public Core headers and the matching Release `/MD` static library, so you can
+skip Core staging below. It does not contain precompiled Unreal modules: regenerate
+project files and build your C++ project's Editor target with UE 5.8, then restart
+the editor. Runtime JSON/CANEB import and cooking follow the same steps below.
+
 ## Prepare the native Core
 
 Use the same MSVC compiler and Windows SDK selected by UnrealBuildTool. The native

@@ -14,18 +14,21 @@
 
 ## 安装与使用
 
-首版以源码形式发布。克隆
-[bucool/cane-runtimes](https://github.com/bucool/cane-runtimes)，
-按照对应引擎的说明集成。本次源码发布不包含预编译安装包和示例压缩包。
+首个 Runtime 预览版已提供 [GitHub Release 下载](https://github.com/bucool/cane-runtimes/releases/tag/v0.1.0-preview.1)，
+包含 Runtime 安装包、浏览器构建和 Windows Godot 原生扩展。
+具体文件选择与 SHA-256 校验方式请见[下载指南](docs/DOWNLOADS.md)。
 
 | 引擎 | 安装方式 |
 | --- | --- |
-| Unity | 通过各自的 `package.json` 安装本地 Core 与 Unity UPM 包。[安装说明](cane-csharp/cane-unity/docs/INSTALLATION.md) |
-| Godot 4.7.2、Windows x64 | 构建原生扩展，将插件文件复制到工程中；无需 C# 或 .NET。[安装说明](cane-cpp/cane-godot/docs/INSTALLATION.md) |
-| Unreal Engine 5.8 | 构建 C++ Core 并安装源码插件。[安装说明](cane-cpp/cane-unreal/docs/INSTALLATION.md) |
-| PixiJS v8 | 构建 TypeScript Core 和 PixiJS 适配器。[使用指南](cane-ts/cane-pixi-v8/README.zh-CN.md) |
-| Cocos Creator 3.8.8 | 构建 TypeScript Core 和对应版本的 Cocos 适配器。[使用指南](cane-ts/cane-cocos-3.8.8/README.zh-CN.md) |
-| LayaAir 3.4.1 | 构建 TypeScript Core 和对应版本的 LayaAir 适配器。[使用指南](cane-ts/cane-layaair-3.4.1/README.zh-CN.md) |
+| Unity | 依次安装 Core 和 Unity 的 `.tgz` 包。[安装说明](cane-csharp/cane-unity/docs/INSTALLATION.md) |
+| Godot 4.7.2、Windows x64 | 将 addon ZIP 解压到工程，无需 C# 或 .NET。[安装说明](cane-cpp/cane-godot/docs/INSTALLATION.md) |
+| Unreal Engine 5.8 | 安装附带 Win64 Core SDK 的插件源码 ZIP，然后编译 C++ 工程的 Editor 目标。[安装说明](cane-cpp/cane-unreal/docs/INSTALLATION.md) |
+| PixiJS v8 | 安装 Core 与 PixiJS npm 压缩包，或使用浏览器构建。[使用指南](cane-ts/cane-pixi-v8/README.zh-CN.md) |
+| Cocos Creator 3.8.8 | 将扩展 ZIP 解压到工程的 `extensions` 目录。[安装说明](cane-ts/cane-cocos-3.8.8/docs/EDITOR_WORKFLOW.zh-CN.md) |
+| LayaAir 3.4.1 | 使用浏览器构建，或把 IDE 资源 ZIP 中的文件复制到工程。[安装说明](cane-ts/cane-layaair-3.4.1/docs/EDITOR_WORKFLOW.zh-CN.md) |
+
+发行包仅包含 Runtime，不包含引擎 SDK、示例工程、Cane 编辑器或 Cane CLI。
+也可以按下方说明从源码构建。
 
 构建所需环境和命令请见[源码构建说明](docs/BUILDING.md)和
 [API 指南](docs/README.md)。构建所需的引擎 SDK 作为外部依赖另行准备。

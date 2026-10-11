@@ -1,16 +1,15 @@
 # Cane in Cocos Creator
 
 For **Cocos Creator 3.8.8**. This guide describes the packaged extension workflow.
-The initial public release contains source only; extension and example archives
-are not included. For source integration, use
-[building from source](../../../docs/BUILDING.md) and the [Runtime API](API.md).
+Download the Creator extension ZIP from [GitHub Releases](https://github.com/bucool/cane-runtimes/releases/tag/v0.1.0-preview.1).
+It bundles Core, the renderer and the Creator integration. For source integration,
+use [building from source](../../../docs/BUILDING.md) and the [Runtime API](API.md).
 
 A prebuilt extension needs no Node.js, pnpm or
 manual Cane compilation. Creator still compiles game scripts and builds games.
 
 ## Install
 
-If you have a Creator 3.8.8 extension package, use the following installation steps.
 Close the project and extract the `cane-runtime` folder into its `extensions`
 directory, so `extensions/cane-runtime/package.json` exists. Open the project
 with Creator 3.8.8 and wait for import. The `cane-runtime` asset mount contains

@@ -1,5 +1,13 @@
 # Unity installation
 
+Download both `com.cane.runtime.core` and `com.cane.runtime.unity` `.tgz`
+packages from [GitHub Releases](https://github.com/bucool/cane-runtimes/releases/tag/v0.1.0-preview.1). In Package Manager, use
+**Install package from tarball**, Core first and Unity second. The packages
+contain Runtime and Unity integration source; Unity compiles it for your project.
+This release does not include sample artwork or scenes.
+
+Alternatively, use the local source packages below.
+
 The source tree contains two local Unity packages:
 
 - `cane-csharp/cane-core/package.json`: engine-neutral Core.

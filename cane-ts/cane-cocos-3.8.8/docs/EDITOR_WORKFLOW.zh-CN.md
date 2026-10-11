@@ -1,14 +1,16 @@
 # 在 Cocos Creator 中使用 Cane
 
 适用于 **Cocos Creator 3.8.8**。本指南介绍扩展安装包的使用流程。
-首版公开仓库只提供源码，不包含扩展和示例压缩包；源码集成请阅读
-[构建说明](../../../docs/BUILDING.md)和 [Runtime API](API.md)。
+从 [GitHub Release](https://github.com/bucool/cane-runtimes/releases/tag/v0.1.0-preview.1) 下载 Creator 扩展 ZIP，
+其中已包含 Core、渲染适配器和 Creator 集成。
+源码集成请阅读[构建说明](../../../docs/BUILDING.md)和 [Runtime API](API.md)。
+
 使用预构建扩展包时，无需安装 Node.js、pnpm，
 也无需编译 Cane Runtime。游戏脚本编译和平台构建仍由 Creator 完成。
 
 ## 安装
 
-1. 准备与 Cocos Creator 3.8.8 匹配的扩展 ZIP；以下步骤适用于已取得扩展包的情况。
+1. 下载与 Cocos Creator 3.8.8 匹配的扩展 ZIP。
 2. 关闭目标 Creator 工程，把压缩包中的 `cane-runtime` 文件夹放入工程的
    `extensions`，最终路径为 `extensions/cane-runtime/package.json`。
 3. 使用 Creator 3.8.8 打开工程，等待扩展和资源导入完成。资源面板会出现

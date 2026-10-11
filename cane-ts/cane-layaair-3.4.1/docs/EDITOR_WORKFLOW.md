@@ -2,31 +2,24 @@
 
 **English** | [简体中文](EDITOR_WORKFLOW.zh-CN.md)
 
-Use exactly **LayaAir IDE 3.4.1**. This guide describes the packaged IDE workflow.
-The initial public release contains source only; the `.layapkg` and example ZIP
-are not included. For source integration, start with
-[building from source](../../../docs/BUILDING.md) and the [Runtime API](API.md).
+Use exactly **LayaAir IDE 3.4.1**. Download the IDE assets ZIP from
+[GitHub Releases](https://github.com/bucool/cane-runtimes/releases/tag/v0.1.0-preview.1). Core and the renderer are prebuilt JavaScript
+with matching TypeScript declarations. The IDE compiles the component and
+its editor integration automatically.
 
-In an editor resource package, Core and the renderer are supplied as JavaScript
-with TypeScript declarations.
-The IDE compiles the component and editor extension automatically; no npm install,
-Runtime build, MCP connection, or account for Cane is needed.
+## Install
 
-## Install and open the example
+1. Close the target project. Extract the ZIP's `assets/Cane` directory into
+   the project, keeping that path and all included `.meta` files.
+2. Reopen the project in LayaAir IDE 3.4.1 and wait for script compilation.
+3. Import your own Runtime export as described below. Select the resulting
+   node to set animation, skin, loop, speed and play on awake.
+4. Enable **Preview** for Scene view playback, or **Preview Run** for the game.
 
-1. Open a 2D project in the IDE. Use **Tools → Import Resource Package**, select
-   the Cane `.layapkg`, and import every entry into `assets/Cane`. Let the IDE
-   finish its automatic script compilation, then reopen the scene if needed.
-2. Alternatively, extract the complete Cane Bot example ZIP and open its `.laya`
-   project. It includes the package and original sample assets.
-3. Open `Scene.ls`. Select either Cane Bot node. Its **Cane Skeleton** component
-   exposes data, animation, skin, loop, speed, play on awake, and editor preview.
-4. Enable **Preview** to animate in Scene view, or use **Preview Run** to play the
-   game. Disable Preview to stop editor playback immediately.
-
-Install one copy per project. Keep it at `assets/Cane`; this is a resource package,
-not a Package Manager installable package. Do not load a second browser bundle
-alongside it. Back up your project before importing an update over that folder.
+Install one copy per project. This ZIP is copied into the project; it is not a
+`.layapkg` import or a Package Manager package. Do not load a second browser
+Runtime alongside it. The release does not contain sample scenes or artwork.
+For source integration see [building from source](../../../docs/BUILDING.md).
 
 ## Import your animation
 

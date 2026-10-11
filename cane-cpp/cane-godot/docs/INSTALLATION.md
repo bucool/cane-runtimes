@@ -1,8 +1,11 @@
 # Godot installation
 
-This first public version supplies source code. Build the Windows x64 native
-extension with the [source build commands](../../../docs/BUILDING.md), then copy
-the addon files and compiled DLL into your project. No .NET installation is needed.
+Download the Windows x64 addon ZIP from [GitHub Releases](https://github.com/bucool/cane-runtimes/releases/tag/v0.1.0-preview.1) and
+extract it at your Godot project's root. It contains the native DLL and
+`addons/cane` editor integration. No .NET installation is needed.
+To build the same extension yourself, follow the
+[source build commands](../../../docs/BUILDING.md).
+
 Follow the
 [editor workflow](EDITOR_WORKFLOW.md) ([中文](EDITOR_WORKFLOW.zh-CN.md))
 to import an animation, drag it into a scene and preview it.

@@ -14,19 +14,22 @@ geometry, UVs, tint and draw order and own engine resources and rendering.
 
 ## Install and use
 
-This first public version distributes source code. Clone
-[bucool/cane-runtimes](https://github.com/bucool/cane-runtimes) and follow the
-source integration guide for your engine. Prebuilt packages and example archives
-are not included in this source release.
+Download the first Runtime preview from [GitHub Releases](https://github.com/bucool/cane-runtimes/releases/tag/v0.1.0-preview.1).
+It includes installable Runtime packages, browser bundles and a Windows Godot
+extension built from this source. See the [download guide](docs/DOWNLOADS.md)
+for the exact asset to choose and SHA-256 verification.
 
 | Engine | Installation |
 | --- | --- |
-| Unity | Install the local Core and Unity UPM packages from their `package.json` files. [Guide](cane-csharp/cane-unity/docs/INSTALLATION.md) |
-| Godot 4.7.2, Windows x64 | Build the native extension and copy its addon files into the project. C#/.NET is not required. [Guide](cane-cpp/cane-godot/docs/INSTALLATION.md) |
-| Unreal Engine 5.8 | Build the C++ Core and install the source plugin. [Guide](cane-cpp/cane-unreal/docs/INSTALLATION.md) |
-| PixiJS v8 | Build the TypeScript Core and PixiJS adapter. [Guide](cane-ts/cane-pixi-v8/README.md) |
-| Cocos Creator 3.8.8 | Build the TypeScript Core and exact-version Cocos adapter. [Guide](cane-ts/cane-cocos-3.8.8/README.md) |
-| LayaAir 3.4.1 | Build the TypeScript Core and exact-version LayaAir adapter. [Guide](cane-ts/cane-layaair-3.4.1/README.md) |
+| Unity | Install the Core and Unity `.tgz` packages, in that order. [Guide](cane-csharp/cane-unity/docs/INSTALLATION.md) |
+| Godot 4.7.2, Windows x64 | Extract the addon ZIP into your project. C#/.NET is not required. [Guide](cane-cpp/cane-godot/docs/INSTALLATION.md) |
+| Unreal Engine 5.8 | Install the source plugin ZIP with its bundled Win64 Core SDK, then compile your C++ project's Editor target. [Guide](cane-cpp/cane-unreal/docs/INSTALLATION.md) |
+| PixiJS v8 | Install the Core and PixiJS npm tarballs, or use the browser bundle. [Guide](cane-ts/cane-pixi-v8/README.md) |
+| Cocos Creator 3.8.8 | Extract the extension ZIP into the project's `extensions` directory. [Guide](cane-ts/cane-cocos-3.8.8/docs/EDITOR_WORKFLOW.md) |
+| LayaAir 3.4.1 | Use the browser bundle or copy the IDE assets ZIP into your project. [Guide](cane-ts/cane-layaair-3.4.1/docs/EDITOR_WORKFLOW.md) |
+
+The release contains Runtime packages only. Engine SDKs, sample projects,
+Cane editor and Cane CLI are not included. Source builds remain available.
 
 For build prerequisites and commands, see
 [building from source](docs/BUILDING.md) and the [API guides](docs/README.md).

@@ -14,11 +14,11 @@ The package is private and `UNLICENSED`; it is not published to npm. `layaair` i
 
 ## Engine prerequisites
 
-This first public version supplies Runtime and IDE integration source. Follow
-[building from source](../../docs/BUILDING.md) for the SDK and build prerequisites.
-The [IDE guide](docs/EDITOR_WORKFLOW.md) describes resource import, scene drag/drop,
-Inspector settings and game builds when an editor resource package is available.
-Prebuilt `.layapkg` files and example projects are not included in this release.
+Download browser Runtime bundles, npm tarballs or the IDE assets ZIP from
+[GitHub Releases](https://github.com/bucool/cane-runtimes/releases/tag/v0.1.0-preview.1). The [IDE guide](docs/EDITOR_WORKFLOW.md)
+explains installation, resource import, scene drag/drop and Inspector preview.
+For source builds, follow [building from source](../../docs/BUILDING.md).
+Engine libraries and example projects are not bundled.
 
 1. Load the official `laya.core.js`, then select one exact 3.4.1 driver:
    - WebGL: load `laya.webgl_2D.js`.
