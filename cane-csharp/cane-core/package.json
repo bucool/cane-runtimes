@@ -1,8 +1,7 @@
 {
-  "name": "com.cane.runtime.core",
-  "version": "0.1.0-alpha.5",
-  "displayName": "Cane Runtime Core",
-  "description": "Engine-neutral Cane C# data, animation and final geometry evaluation.",
-  "unity": "6000.0",
-  "author": { "name": "Cane" }
+  "name": "com.cane.core",
+  "version": "0.2.0-dev.1",
+  "displayName": "Cane Core",
+  "description": "Independent native C# runtime for Cane v2 skeletal animation.",
+  "unity": "6000.3"
 }

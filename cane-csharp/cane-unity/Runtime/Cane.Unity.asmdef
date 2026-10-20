@@ -2,6 +2,9 @@
   "name": "Cane.Unity",
   "rootNamespace": "Cane.Unity",
   "references": ["Cane.Core"],
-  "autoReferenced": true,
-  "allowUnsafeCode": false
+  "versionDefines": [
+    { "name": "com.unity.modules.physics", "expression": "1.0.0", "define": "CANE_PHYSICS_3D" },
+    { "name": "com.unity.modules.physics2d", "expression": "1.0.0", "define": "CANE_PHYSICS_2D" },
+    { "name": "com.unity.modules.animation", "expression": "1.0.0", "define": "CANE_ANIMATION" }
+  ]
 }

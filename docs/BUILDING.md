@@ -29,29 +29,25 @@ helper also stages the matching declaration file. Outputs are under each package
 `pnpm --dir cane-ts --filter @cane-runtime/core build`. PixiJS can be built without
 LayaAir/Cocos SDKs using `pnpm --dir cane-ts --filter @cane-runtime/pixi-v8... build`.
 
-## C# Core
+## C# and Unity
 
-Use the .NET SDK selected by `cane-csharp/global.json`. Core targets `netstandard2.1`.
-
-```powershell
-dotnet build cane-csharp/cane-core/Cane.Core.csproj -c Release -p:CaneBuildRoot=E:/cane-build/csharp
-dotnet pack cane-csharp/cane-core/Cane.Core.csproj -c Release -p:CaneBuildRoot=E:/cane-build/csharp -o E:/cane-build/packages
-```
-
-## Unity
-
-Install Core and then Unity as local UPM packages using their `package.json` files;
-see [Unity installation](../cane-csharp/cane-unity/docs/INSTALLATION.md).
-Unity compiles their source. To compile the Built-in adapter directly against an
-installed Editor's managed assemblies:
+The C# Core targets .NET Standard 2.1 and C# 9. With a current .NET SDK:
 
 ```powershell
-dotnet build cane-csharp/cane-unity/Cane.Unity.csproj -c Release -p:CaneBuildRoot=E:/cane-build/unity -p:UnityEditorRoot=E:/Unity/6000.3.23f1/Editor
+dotnet build cane-csharp/cane-core/Cane.Core.csproj -c Release
 ```
 
-For Unity 6000.4 or later, also pass `-p:CaneUnityEntityIds=true` to that standalone
-managed build. Unity itself supplies the corresponding version define.
-URP and HDRP source assemblies are enabled by their matching Unity packages.
+`cane-csharp/Directory.Build.props` places Core build intermediates and outputs
+under the repository's ignored `.tmp/csharp-v2/build/`. Keep this checkout on
+the permitted build drive.
+
+For Unity 6000.3, use Package Manager **Add package from disk** to install
+`cane-csharp/cane-core/package.json`, then `cane-csharp/cane-unity/package.json`.
+Unity compiles the C# source itself; it does not require a separate Core DLL,
+Rust, a native plugin or an external .NET SDK.
+
+Install URP, UI Toolkit or Addressables adapters as needed. Their installation,
+dependencies and runtime use are described in the [C# family guide](../cane-csharp/README.md).
 
 ## C++ Core
 

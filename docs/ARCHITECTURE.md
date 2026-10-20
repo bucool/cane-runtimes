@@ -1,11 +1,26 @@
 # Runtime architecture
 
+## Native C# and Unity v2
+
+The native [C# family](../cane-csharp/README.md) implements the
+[v2 contract](../specification/runtime/RUNTIME_V2.md) and loads existing v2 JSON
+and `.cane2` exports without changing the animation or texture resources.
+Core targets .NET Standard 2.1, owns animation, constraints and final geometry,
+and has no Unity, Rust, native interop or third-party dependency. Shared indexed
+data is immutable to callers; each instance owns its state and reusable output.
+Frames are borrowed until the next evaluation.
+
+Unity owns resources, mesh/Canvas rendering and game integration. Optional URP,
+UI Toolkit and Addressables packages share the same Core and player; they do not
+resample animation or reconstruct final geometry. The historical v1 evaluator,
+API facade and export formats are not retained in this implementation.
+
 ## Language boundaries
 
 Each language owns one independent Core and its engine adapters:
 
 - `cane-ts/cane-core`: TypeScript Core; PixiJS, LayaAir and Cocos adapters are sibling packages.
-- `cane-csharp/cane-core`: independent managed Core; Unity integration is in `cane-unity`.
+- `cane-csharp/cane-core`: native v2 managed Core; Unity integration is in `cane-unity`.
 - `cane-cpp/cane-core`: independent native Core; Godot integration is in `cane-godot`
   and the UE 5.8 source integration is in `cane-unreal`.
 

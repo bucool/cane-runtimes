@@ -1,0 +1,6 @@
+{
+  "name": "Cane.Unity.UIToolkit",
+  "rootNamespace": "Cane.Unity",
+  "references": ["Cane.Core", "Cane.Unity"],
+  "allowUnsafeCode": true
+}

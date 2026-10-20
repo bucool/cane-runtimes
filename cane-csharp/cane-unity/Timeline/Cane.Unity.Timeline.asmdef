@@ -1,0 +1,7 @@
+{
+  "name": "Cane.Unity.Timeline",
+  "rootNamespace": "Cane.Unity",
+  "references": ["Cane.Core", "Cane.Unity", "Unity.Timeline"],
+  "defineConstraints": ["CANE_TIMELINE"],
+  "versionDefines": [{"name": "com.unity.timeline", "expression": "1.8.0", "define": "CANE_TIMELINE"}]
+}

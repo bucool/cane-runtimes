@@ -1,60 +1,32 @@
-# Cane C# runtime family
+# Cane C# and Unity
 
-**English** | [简体中文](README.zh-CN.md)
+The native C# v2 runtime targets existing JSON and `.cane2` exports, the current
+TS Core capability set, and Unity 6000.3.23f1.
+It does not load historical runtime formats or use an FFI implementation.
 
-This family is an independent C# implementation of Cane Runtime JSON/CANEB 1.1, Atlas 1.0 and Runtime API 1.13. The Core is a `netstandard2.1` library with no engine, Rust, FFI, interpreter, or external JSON dependency. Unity integration belongs in `cane-unity` and must consume final Core render packets. The shared [version contract](../specification/runtime/VERSIONING.md) and [specification lock](../spec-lock.json) define the compatibility target.
+In Unity Package Manager, install Core first and the base Unity package second,
+then any optional adapters. Use **Add package from disk** with each package's
+`package.json` in a source checkout, or **Add package from tarball** with the
+corresponding `.tgz` delivery files. The package guides below describe usage and
+the required Unity modules.
 
-## Core and Unity integration
+`cane-core` targets .NET Standard 2.1 and owns decoding, animation, constraints,
+queries and final geometry. [cane-unity](cane-unity/README.md) owns Unity resources,
+scene/Canvas rendering and lifecycle. Unity does not re-evaluate Core output.
+The optional [URP package](cane-unity-urp/README.md) contains scene shaders;
+the base Unity package does not depend on URP.
+The optional [UI Toolkit package](cane-unity-uitoolkit/README.md) provides a
+UXML control over the same final geometry and player, without a per-character
+RenderTexture.
+The optional [Addressables package](cane-unity-addressables/README.md) shares
+on-demand texture loads and placeholder resources across players.
 
-The Core owns loading and validation, animation tracks/queues/mixing, constraints,
-Physics, skins and deform, clipping, final render packets, instance resources,
-queries and transactional player state. Animation keys support zero bone scale
-while setup bone and Region scales retain their format validation rules.
+Core behavior is checked against the TS/Rust references and original animation
+exports. Unity regression coverage includes scene/Canvas/UI Toolkit rendering,
+skins and attachments, native masks, Animator, Timeline, root motion, bone
+drivers/followers, Physics, atlas packing, lighting/effects and streamed resources.
+The validated Unity profile is Windows x64 Mono, D3D11, Gamma and Linear, with
+Built-in and URP 17.3. The packages retain their pre-1.0 version identifiers.
 
-See [loading](docs/LOADING.md), [constraints and playback](docs/CONSTRAINTS_AND_PLAYBACK.md),
-[geometry and resources](docs/GEOMETRY_AND_RESOURCES.md), and
-[project replacement](docs/PROJECT_RECONCILIATION.md) for the public contracts.
-[Unity installation](cane-unity/docs/INSTALLATION.md) describes the engine packages
-and host setup.
-
-## Data and ownership
-
-[Prepared external-resource loading](docs/LOADING.md) separates immutable decode requests from completed `RuntimeData`. Hosts can decode direct images with omitted width or height, then supply the full observed catalog before publishing. Unity uses this path without guessing image sizes.
-
-Installed resources are immutable values; a player's effective catalog is an instance overlay over `SourceData`. Unity/GPU objects cannot enter those values. Geometry callbacks execute in Core through a bounded editor; attempts to change the same player recursively fail atomically.
-
-Feature declarations are checked against actual model usage. Resource transactions include added feature requirements, accept verified features by default, and retain original CANEB warning metadata.
-
-## Core usage
-
-[Capability discovery](docs/CAPABILITIES.md) exposes supported versions, the immutable feature list, API bits and the last passed Core suite digest. Known features load by default; unknown features and unsupported versions always fail:
-
-```csharp
-var data = RuntimeData.FromJson(runtimeJson, new RuntimeLoadOptions {
-    AtlasJson = atlasDocumentsById
-});
-var player = data.CreatePlayer();
-player.PlayAnimation(animationId, looping: true);
-player.Advance(deltaSeconds);
-RenderPacket packet = player.Frame.RenderPacket;
-```
-
-The host resolves textures from packet descriptors and uploads final world XY, UVs, indices, light/dark tint and declared blend mode in packet order. It must not apply `SourceAffine` to those vertices, recalculate atlas UVs or tint, or run another constraint/deform/modifier pass. Core world coordinates are X right/Y up and UV origin is top left. Retained frames are independently owned; retained `RuntimeBounds` views expire on the next write into that same bounds object, while `Snapshot()` returns an owned result.
-
-Bounds queries reject a binary32 width or height overflow with `NonFinite` (`aabb.width` or `aabb.height`), even when all source vertices remain finite. Such a read failure leaves the player's publication and playback unchanged. As with other failed writes, discard the contents of the supplied bounds buffer until a successful rewrite.
-
-Players are single-writer objects. Data and published immutable frames can be shared. `AdvanceTime` advances state without publishing; `Apply` publishes without advancing animation clocks. Failed evaluations preserve the prior frame, tracks, Physics history, overlay and pending events. `CloneConfiguration` starts without tracks, queues, events or solver history.
-
-See [geometry, authoring, and resource APIs](docs/GEOMETRY_AND_RESOURCES.md) and [constraints, snapshots, and playback controls](docs/CONSTRAINTS_AND_PLAYBACK.md) for the public contracts. The NuGet package includes these guides plus project reconciliation and capability discovery.
-
-[Published Slot queries](docs/SLOT_QUERIES.md) expose complete sampled order and owner bone poses without evaluation.
-
-[Point and bone activity queries](docs/POINT_QUERIES.md) expose full affine and published selection/activity without adding normalized wire fields.
-
-[Core performance and ownership](docs/PERFORMANCE.md) describes compiled skins,
-private pose/rendering workspaces and immutable channel sharing. Published
-frames remain independently owned; animation and resource changes can allocate.
-
-## Building from source
-
-See [source build instructions](../docs/BUILDING.md).
+See the [performance profile](docs/PERFORMANCE.md) for measured complete-frame
+latency, cold loading, actual Player size and the comparison methodology.

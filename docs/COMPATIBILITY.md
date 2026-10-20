@@ -1,5 +1,21 @@
 # Compatibility and version policy
 
+## C# and Unity v2
+
+The native [C# Core](../cane-csharp/cane-core/README.md) uses the
+[v2 contract](../specification/runtime/RUNTIME_V2.md), existing JSON / `.cane2`
+resources and indexed APIs. It targets .NET Standard 2.1 and C# 9.
+Install matching `com.cane.core` and `com.cane.unity` 0.2.0-dev.1 source packages;
+these do not load v1 CANEB or provide the old RuntimePlayer API.
+
+Unity integration is validated on Unity 6000.3.23f1, Windows x64 Mono and D3D11,
+in Gamma and Linear, including Built-in and URP 17.3 Forward, Forward+ and 2D.
+Optional UI Toolkit and Addressables packages use the same Core and player.
+See the [Unity guide](../cane-csharp/cane-unity/README.md) and measured
+[performance profile](../cane-csharp/docs/PERFORMANCE.md). Other deployment
+profiles require their own validation. The historical v1 results below do not
+certify these replacement packages.
+
 This repository currently contains source candidates, not published npm
 artifacts. Package version, Runtime API version, Runtime Format version, and
 conformance suite version are independent compatibility domains.
@@ -12,8 +28,8 @@ conformance suite version are independent compatibility domains.
 | `@cane-runtime/pixi-v8` | PixiJS 8.18.1 peer; browser ESM plus optional Core-inclusive IIFE | WebGL and WebGPU visually exercised; Canvas2D is an explicit downgrade |
 | `@cane-runtime/layaair-3.4.1` | Exact LayaAir 3.4.1 peer; prebuilt ESM/IIFE/declarations and IDE resource package | JSON/CANEB import, serialized scene component and preview; WebGL/WebGPU game builds; native/NoRender rejected explicitly |
 | `@cane-runtime/cocos-3.8.8` | Exact Cocos Creator 3.8.8 virtual `cc` module; ESM and declarations; no bundled engine | Creator WebGL/WebGPU plus Windows Native RenderEntity route |
-| C# Core | `netstandard2.1`, Runtime JSON/CANEB 1.1, Atlas 1.0 and Runtime API 1.13 | Engine-neutral owned data, players and final packets |
-| Unity | Unity 6000.3.23f1 and 6000.6.0f1 on Windows; Built-in, URP/HDRP integrations | Linear project color space; see the engine integration guide for tested pipeline versions and pass setup |
+| C# Core v1 (historical release) | `netstandard2.1`, Runtime JSON/CANEB 1.1, Atlas 1.0 and Runtime API 1.13 | Superseded by the native v2 source described above |
+| Unity v1 (historical release) | Original Built-in/URP/HDRP release integrations | Superseded by the v2 source profile described above |
 | C++ Core | C++17, Runtime JSON/CANEB 1.1, Atlas 1.0 and Runtime API 1.13 | Native engine-neutral Core |
 | Godot | Ordinary Godot 4.7.2, Windows x64; Compatibility and Forward+; compiled against the 4.5 native ABI | Requires HDR 2D; does not require .NET. The ABI minimum does not certify older renderers |
 | Unreal Engine | UE 5.8 / Windows x64; independent C++ Core | Runtime and editor import modules must link the same staged Core SDK; see the source installation guide |
@@ -42,7 +58,7 @@ must supply the exact official SDK/IDE engine rather than relaxing the peer.
 
 ## Whole-mesh placement
 
-The TypeScript, C# and C++ cores support Runtime API 1.13
+The historical v1 TypeScript, C# and C++ cores support Runtime API 1.13
 [`mesh.placement`](../specification/runtime/MESH_PLACEMENT_V1.md). Moving a
 weighted image translates its final skinned geometry while preserving its
 existing animation. JSON, CANEB, resource overlays, linked meshes and inverse

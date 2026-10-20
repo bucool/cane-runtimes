@@ -1,20 +1,8 @@
 {
-  "name": "com.cane.runtime.unity",
-  "version": "0.1.0-alpha.5",
-  "displayName": "Cane Runtime for Unity",
-  "description": "Unity resource and final-packet rendering adapter over the independent Cane C# Core.",
+  "name": "com.cane.unity",
+  "version": "0.2.0-dev.1",
+  "displayName": "Cane for Unity",
+  "description": "Unity resources, rendering and lifecycle for native Cane Core.",
   "unity": "6000.3",
-  "dependencies": {
-    "com.cane.runtime.core": "0.1.0-alpha.5",
-    "com.unity.modules.imageconversion": "1.0.0",
-    "com.unity.modules.jsonserialize": "1.0.0"
-  },
-  "samples": [{
-    "displayName": "Spineboy",
-    "description": "Imported animation scene and optional file-loading example.",
-    "path": "Samples~/CaneBot"
-  }],
-  "author": {
-    "name": "Cane"
-  }
+  "dependencies": { "com.cane.core": "0.2.0-dev.1" }
 }

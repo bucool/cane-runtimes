@@ -1,0 +1,8 @@
+{
+  "name": "com.cane.unity.addressables",
+  "version": "0.2.0-dev.1",
+  "displayName": "Cane Addressables",
+  "description": "Shared on-demand texture loading for Cane Unity.",
+  "unity": "6000.3",
+  "dependencies": { "com.cane.unity": "0.2.0-dev.1", "com.unity.addressables": "2.9.1" }
+}

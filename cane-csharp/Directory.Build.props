@@ -2,10 +2,10 @@
   <PropertyGroup>
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ImplicitUsings>disable</ImplicitUsings>
     <Deterministic>true</Deterministic>
-    <CaneBuildRoot Condition="'$(CaneBuildRoot)' == ''">$(MSBuildThisFileDirectory)../.tmp/csharp</CaneBuildRoot>
-    <BaseIntermediateOutputPath>$(CaneBuildRoot)/obj/$(MSBuildProjectName)/</BaseIntermediateOutputPath>
-    <BaseOutputPath>$(CaneBuildRoot)/bin/$(MSBuildProjectName)/</BaseOutputPath>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)../.tmp/csharp-v2/build/$(MSBuildProjectName)/bin/</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)../.tmp/csharp-v2/build/$(MSBuildProjectName)/obj/</BaseIntermediateOutputPath>
   </PropertyGroup>
 </Project>

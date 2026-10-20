@@ -1,5 +1,12 @@
 # Runtime downloads / Runtime 下载
 
+The downloads below are the historical v0.1.0 snapshot. They do not contain the
+current native C# Core / Unity v2 packages. Install those from source using the
+[C# family guide](../cane-csharp/README.md).
+
+下方下载对应历史 v0.1.0 快照，不包含当前新版 C# Core / Unity；
+新版请按 [C# 系列指南](../cane-csharp/README.md)从源码安装。
+
 [Download v0.1.0-preview.1 / 下载首个预览版](https://github.com/bucool/cane-runtimes/releases/tag/v0.1.0-preview.1)
 
 All assets belong to the same Runtime source snapshot and include Runtime API 1.13

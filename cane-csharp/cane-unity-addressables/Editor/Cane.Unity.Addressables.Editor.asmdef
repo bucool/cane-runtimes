@@ -1,0 +1,5 @@
+{
+  "name": "Cane.Unity.Addressables.Editor",
+  "references": ["Cane.Core", "Cane.Unity", "Cane.Unity.Editor", "Cane.Unity.Addressables", "Unity.Addressables", "Unity.ResourceManager", "Unity.Addressables.Editor"],
+  "includePlatforms": ["Editor"]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "com.cane.unity.urp",
+  "version": "0.2.0-dev.1",
+  "displayName": "Cane for Universal Render Pipeline",
+  "description": "Optional URP scene shaders for Cane's final geometry.",
+  "unity": "6000.3",
+  "dependencies": {
+    "com.cane.unity": "0.2.0-dev.1",
+    "com.unity.render-pipelines.universal": "17.3.0"
+  }
+}

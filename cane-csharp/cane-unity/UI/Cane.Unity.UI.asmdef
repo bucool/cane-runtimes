@@ -1,0 +1,7 @@
+{
+  "name": "Cane.Unity.UI",
+  "rootNamespace": "Cane.Unity",
+  "references": ["Cane.Core", "Cane.Unity", "Unity.ugui"],
+  "defineConstraints": ["CANE_UGUI"],
+  "versionDefines": [{"name": "com.unity.ugui", "expression": "1.0.0", "define": "CANE_UGUI"}]
+}

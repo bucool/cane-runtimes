@@ -1,5 +1,10 @@
 # Rendering color spaces
 
+The shared texture normalization description below records the v1 contract.
+For the native C#/Unity v2 implementation, use the
+[v2 storage-space PMA contract](../specification/runtime/RUNTIME_V2.md) and
+[Unity color guide](../cane-csharp/cane-unity/README.md#color-and-geometry).
+
 The renderer's **Blend Color Space** selects the RGB working space for texture
 filtering, material tint and layer blending. It does not change animation
 sampling, geometry, exported texture bytes or RenderPacket metadata.
@@ -57,7 +62,7 @@ GPU paths.
 | [PixiJS](../cane-ts/cane-pixi-v8/README.md#texture-and-color-contract) | `character.blendColorSpace = "linear"` | Ordered Cane segments include the previous Pixi destination. Linear needs WebGL2 float targets or WebGPU; no depth/stencil target or host mask. |
 | [LayaAir](../cane-ts/cane-layaair-3.4.1/README.md#gamma-and-linear-composition) | `setCaneLayaColorBlendingV1("linear")` | Complete 2D stage; all actors share the profile. Mixed 3D camera stages are rejected. |
 | [Cocos Creator](../cane-ts/cane-cocos-3.8.8/docs/API.md) | `hero.setColorProfile(CaneCocosBlendColorSpaceV1.Linear, CaneCocosCompositionModeV1.IsolatedSurface)` | Direct Canvas drawing defaults to Gamma. Linear requires an explicit per-character isolated surface; other Canvas nodes and scene backdrop are outside that composition. Native Slot interleaving is rejected in isolated mode. Verified on WebGL2, WebGPU and Windows Native GLES3; other native platforms are unverified. |
-| [Unity](../cane-csharp/cane-unity/docs/COLOR_BLENDING.md) | `CaneCameraRenderer.BlendColorSpace` | Camera pass, including earlier destination and native Slot content. Keep the Unity project in Linear; Gamma supports a single 2D view. URP/HDRP expose the same setting. |
+| [Unity v2](../cane-csharp/cane-unity/README.md#color-and-geometry) | Unity project Gamma/Linear setting | Native Built-in and optional URP materials; the resource layer normalizes textures for the active project color space. |
 | [Godot](../cane-cpp/cane-godot/docs/COLOR_BLENDING.md) | `CaneSkeleton.blend_color_space` | `0` Gamma, `1` Linear. Keep HDR 2D enabled. Transparent Gamma requires Compatibility; Forward+/Mobile transparent targets can use Linear. |
 | [Unreal](../cane-cpp/cane-unreal/docs/API.md) | `BlendColorSpace` / `SetBlendColorSpace` | Component, UMG widget and isolated surface. Public isolated textures remain linear PMA for engine materials. |
 

@@ -1,0 +1,4 @@
+{
+  "name": "Cane.Unity.Addressables",
+  "references": ["Cane.Core", "Cane.Unity", "Unity.Addressables", "Unity.ResourceManager"]
+}

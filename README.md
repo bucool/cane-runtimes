@@ -9,10 +9,16 @@ geometry, UVs, tint and draw order and own engine resources and rendering.
 | Language | Runtime |
 | --- | --- |
 | TypeScript | [Core](cane-ts/cane-core/README.md), [PixiJS](cane-ts/cane-pixi-v8/README.md), [LayaAir 3.4.1](cane-ts/cane-layaair-3.4.1/README.md), [Cocos Creator 3.8.8](cane-ts/cane-cocos-3.8.8/README.md) |
-| C# | [Core](cane-csharp/README.md), [Unity](cane-csharp/cane-unity/README.md) |
+| C# v2 | [Core](cane-csharp/cane-core/README.md), [Unity](cane-csharp/cane-unity/README.md), [optional adapters](cane-csharp/README.md) |
 | C++ | [Core](cane-cpp/README.md), [native Godot GDExtension](cane-cpp/cane-godot/README.md), [Unreal Engine 5.8 source plugin](cane-cpp/cane-unreal/README.md) |
 
 ## Install and use
+
+The native C# Core and Unity v2 packages are available as pre-1.0 source, with
+optional URP, UI Toolkit and Addressables integrations. See the
+[C# family guide](cane-csharp/README.md) and
+[measured performance profile](cane-csharp/docs/PERFORMANCE.md).
+The historical v0.1.0 downloads below do not contain these replacement packages.
 
 Download the first Runtime preview from [GitHub Releases](https://github.com/bucool/cane-runtimes/releases/tag/v0.1.0-preview.1).
 It includes installable Runtime packages, browser bundles and a Windows Godot
@@ -21,7 +27,7 @@ for the exact asset to choose and SHA-256 verification.
 
 | Engine | Installation |
 | --- | --- |
-| Unity | Install the Core and Unity `.tgz` packages, in that order. [Guide](cane-csharp/cane-unity/docs/INSTALLATION.md) |
+| Unity v2 | Install the current Core and Unity source packages from disk, in that order. [Guide](cane-csharp/README.md) |
 | Godot 4.7.2, Windows x64 | Extract the addon ZIP into your project. C#/.NET is not required. [Guide](cane-cpp/cane-godot/docs/INSTALLATION.md) |
 | Unreal Engine 5.8 | Install the source plugin ZIP with its bundled Win64 Core SDK, then compile your C++ project's Editor target. [Guide](cane-cpp/cane-unreal/docs/INSTALLATION.md) |
 | PixiJS v8 | Install the Core and PixiJS npm tarballs, or use the browser bundle. [Guide](cane-ts/cane-pixi-v8/README.md) |

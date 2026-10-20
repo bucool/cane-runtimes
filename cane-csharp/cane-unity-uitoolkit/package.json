@@ -1,0 +1,11 @@
+{
+  "name": "com.cane.unity.uitoolkit",
+  "version": "0.2.0-dev.1",
+  "displayName": "Cane for UI Toolkit",
+  "description": "Optional UI Toolkit adapter for Cane's final geometry; under validation.",
+  "unity": "6000.3",
+  "dependencies": {
+    "com.cane.unity": "0.2.0-dev.1",
+    "com.unity.modules.uielements": "1.0.0"
+  }
+}

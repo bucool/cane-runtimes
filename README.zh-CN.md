@@ -9,10 +9,15 @@
 | 语言 | Runtime |
 | --- | --- |
 | TypeScript | [Core](cane-ts/cane-core/README.zh-CN.md)、[PixiJS](cane-ts/cane-pixi-v8/README.zh-CN.md)、[LayaAir 3.4.1](cane-ts/cane-layaair-3.4.1/README.zh-CN.md)、[Cocos Creator 3.8.8](cane-ts/cane-cocos-3.8.8/README.zh-CN.md) |
-| C# | [Core](cane-csharp/README.zh-CN.md)、[Unity](cane-csharp/cane-unity/README.zh-CN.md) |
+| C# v2 | [Core](cane-csharp/cane-core/README.md)、[Unity](cane-csharp/cane-unity/README.md)、[可选适配包](cane-csharp/README.md) |
 | C++ | [Core](cane-cpp/README.zh-CN.md)、[Godot 原生 GDExtension](cane-cpp/cane-godot/README.zh-CN.md)、[Unreal Engine 5.8 源码插件](cane-cpp/cane-unreal/README.zh-CN.md) |
 
 ## 安装与使用
+
+原生 C# Core 和 Unity v2 已提供 pre-1.0 源码包，另有 URP、UI Toolkit 和
+Addressables 可选集成。请参阅 [C# 系列指南](cane-csharp/README.md)及
+[性能对比说明](cane-csharp/docs/PERFORMANCE.md)。
+下方历史 v0.1.0 下载不包含本次新版 C#/Unity。
 
 首个 Runtime 预览版已提供 [GitHub Release 下载](https://github.com/bucool/cane-runtimes/releases/tag/v0.1.0-preview.1)，
 包含 Runtime 安装包、浏览器构建和 Windows Godot 原生扩展。
@@ -20,7 +25,7 @@
 
 | 引擎 | 安装方式 |
 | --- | --- |
-| Unity | 依次安装 Core 和 Unity 的 `.tgz` 包。[安装说明](cane-csharp/cane-unity/docs/INSTALLATION.md) |
+| Unity v2 | 从磁盘依次安装当前 Core 和 Unity 源码包。[安装说明](cane-csharp/README.md) |
 | Godot 4.7.2、Windows x64 | 将 addon ZIP 解压到工程，无需 C# 或 .NET。[安装说明](cane-cpp/cane-godot/docs/INSTALLATION.md) |
 | Unreal Engine 5.8 | 安装附带 Win64 Core SDK 的插件源码 ZIP，然后编译 C++ 工程的 Editor 目标。[安装说明](cane-cpp/cane-unreal/docs/INSTALLATION.md) |
 | PixiJS v8 | 安装 Core 与 PixiJS npm 压缩包，或使用浏览器构建。[使用指南](cane-ts/cane-pixi-v8/README.zh-CN.md) |
